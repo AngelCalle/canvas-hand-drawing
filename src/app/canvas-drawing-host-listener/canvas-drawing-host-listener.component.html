@@ -1,0 +1,21 @@
+<ng-container>
+    <div>
+        <canvas
+            #canvas
+            [id]="options?.idCanvas"
+            [style]="{
+                'background-color': options?.backgroundColor,
+                'border': options?.border
+            }">
+        </canvas>
+    </div>
+
+    <div>
+        <button *ngIf="options?.textButtonClean" type="button" id="clean" (click)="clean()">
+            {{ options?.textButtonClean }}
+        </button>
+        <button *ngIf="options?.textButtonImage" type="button" id="generateImage" (click)="generateImage()">
+            {{ options?.textButtonImage }}
+        </button>
+    </div>
+</ng-container>
