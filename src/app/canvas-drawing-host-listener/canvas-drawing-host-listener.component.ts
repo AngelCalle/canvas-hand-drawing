@@ -19,7 +19,9 @@ export class CanvasDrawingHostListenerComponent implements AfterViewInit, OnChan
     backgroundColor: 'red',
     border: '#000',
     textButtonClean: 'Clean',
-    textButtonImage:'img',
+    textButtonImgElement:'img',
+    textButtonJpg:'Jpg',
+    textButtonPdf:'Pdf',
     clean: false
   };
 
@@ -83,8 +85,35 @@ export class CanvasDrawingHostListenerComponent implements AfterViewInit, OnChan
       this.cx = <CanvasRenderingContext2D> CANVAS_EL.getContext('2d');
       this.cx.lineWidth = this.options.lineWidth;
       this.cx.lineCap = this.options.lineCap;
-      this.cx.strokeStyle = this.options.strokeStyle;   
+      this.cx.strokeStyle = this.options.strokeStyle;
+
+      this.paintBackgroundImage();
+
     }
+  }
+  
+  private paintBackgroundImage(): void {
+    let image: HTMLImageElement = new Image(600, 600);
+    image.src = '../../assets/img/caramelos-miel.jpg';
+
+    setTimeout(() => {
+      if (image) {
+        this.cx.drawImage(image, 0, 0, 600, 600);
+      }
+    });
+
+    // x canvas, y canvas
+    // this.cx.drawImage(foto, 10, 50);
+    // x canvas, y canvas, alto imagen, ancho imagen,
+    // this.cx.drawImage(foto, 10, 50, 200, 200);
+    // cordenadas de recorte tamaño de recorte 
+    // this.cx.drawImage(myImage, 150,100, 100, 100, 50, 200, 200);
+    // elemento img del template
+    // <!-- <img id="image" width="600" height="600" src="../../assets/img/caramelos-miel.jpg"> -->
+    // setTimeout(() => {
+    //   const image: CanvasImageSource = <CanvasImageSource> document.getElementById('image');
+    //   this.cx.drawImage(image, 0, 0, 600, 600);
+    // }, 0);
   }
 
   private write(res: MouseEvent): void {
@@ -114,6 +143,21 @@ export class CanvasDrawingHostListenerComponent implements AfterViewInit, OnChan
       this.cx.moveTo(prevPos.x, prevPos.y);
       this.cx.lineTo(currentPost.x, currentPost.y);
       this.cx.stroke();
+
+      // /*esto dibuja un triangulo*/
+      // this.cx.moveTo(currentPost.x,currentPost.y);
+      // this.cx.lineTo(currentPost.x-15,currentPost.y +30);
+      // this.cx.lineTo(currentPost.x+15,currentPost.y +30);
+
+      // /*esto dibuja un cuadrado*/
+      // this.cx.fillRect(prevPos.x-25,prevPos.y-25,50,50);
+
+      // /*esto dibuja un circulo*/
+      // let r = 10;
+      // this.cx.arc(currentPost.x, currentPost.y, r, 0, 2*Math.PI);
+
+      this.cx.closePath();
+      this.cx.stroke();
     }
   }
 
@@ -122,10 +166,40 @@ export class CanvasDrawingHostListenerComponent implements AfterViewInit, OnChan
     this.cx.clearRect(0, 0, this.options.width, this.options.height);
   }
 
-  generateImage(): void {
+  generateImgElement(): void {
     const CANVAS_EL: HTMLCanvasElement = this.canvas?.nativeElement;
     const IMG: string = CANVAS_EL.toDataURL("image/png");
     document.write('<img src="'+IMG+'"/>');
   }
-  
+
+  downloadJpg(): void {
+    const CANVAS_EL: HTMLCanvasElement = this.canvas?.nativeElement;
+    let enlace: HTMLAnchorElement = document.createElement('a');
+    enlace.href = CANVAS_EL.toDataURL();
+    enlace.click();
+  }
+
+  downloadPdf(): void {
+    const CANVAS_EL: HTMLCanvasElement = this.canvas?.nativeElement;
+    if (CANVAS_EL) {
+      let image: HTMLImageElement = document.createElement("img") as HTMLImageElement;
+      image.src = CANVAS_EL.toDataURL('image/jpeg', 1.0);
+
+      const IMAGE_TO_PRINT: string = this.imageToPrint(image.src);
+      const PAGE_LINK: string = 'about:blank';
+      let pwa: any = window.open(PAGE_LINK, '_new');
+      pwa.document.open();
+      pwa.document.write(IMAGE_TO_PRINT);
+      pwa.document.close();
+    }
+  }
+
+  imageToPrint(source: string): string {
+      return "<html><head><script>function step1(){\n" +
+              "setTimeout('step2()', 10);}\n" +
+              "function step2(){window.print();window.close()}\n" +
+              "</script></head><body onload='step1()'>\n" +
+              "<img src='" + source + "' /></body></html>";
+  }
+
 }

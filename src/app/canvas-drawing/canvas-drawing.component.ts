@@ -21,7 +21,9 @@ export class CanvasDrawingComponent implements AfterViewInit, OnChanges, OnDestr
     backgroundColor: 'red',
     border: '#000',
     textButtonClean: 'Clean',
-    textButtonImage:'img',
+    textButtonImgElement:'img',
+    textButtonJpg:'Jpg',
+    textButtonPdf:'Pdf',
     clean: false
   };
   
@@ -121,7 +123,7 @@ export class CanvasDrawingComponent implements AfterViewInit, OnChanges, OnDestr
     this.cx.clearRect(0, 0, this.options.width, this.options.height);
   }
 
-  generateImage(): void {
+  generateImgElement(): void {
     const CANVAS_EL: HTMLCanvasElement = this.canvas?.nativeElement;
     const IMG: string = CANVAS_EL.toDataURL("image/png");
     document.write('<img src="'+IMG+'"/>');

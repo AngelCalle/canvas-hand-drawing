@@ -21,23 +21,25 @@ export class AppComponent {
       backgroundColor: 'rgba(230, 167, 116, 0.87)',
       border: '1px solid rgb(2, 1, 0)',
       textButtonClean: 'Limpiar',
-      textButtonImage: 'Generar imagen',
+      textButtonImgElement: 'Generar elemento img',
+      textButtonJpg: 'Descargar jpg',
+      textButtonPdf: 'Descargar Pdf',
       clean: false
     }
 
-    setTimeout(() => {
-      this.options = {
-        ...this.options,
-        width: 330
-      };
-    }, 2000);
+    // setTimeout(() => {
+    //   this.options = {
+    //     ...this.options,
+    //     width: 330
+    //   };
+    // }, 2000);
 
-    setTimeout(() => {
-      this.options = {
-        ...this.options,
-        clean: true
-      };
-    }, 6000);
+    // setTimeout(() => {
+    //   this.options = {
+    //     ...this.options,
+    //     clean: true
+    //   };
+    // }, 6000);
   }
 
 }

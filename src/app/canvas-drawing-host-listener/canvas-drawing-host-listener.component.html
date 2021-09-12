@@ -1,3 +1,4 @@
+
 <ng-container>
     <div>
         <canvas
@@ -14,8 +15,14 @@
         <button *ngIf="options?.textButtonClean" type="button" id="clean" (click)="clean()">
             {{ options?.textButtonClean }}
         </button>
-        <button *ngIf="options?.textButtonImage" type="button" id="generateImage" (click)="generateImage()">
-            {{ options?.textButtonImage }}
+        <button *ngIf="options?.textButtonImgElement" type="button" id="generateImgElement" (click)="generateImgElement()">
+            {{ options?.textButtonImgElement }}
+        </button>
+        <button *ngIf="options?.textButtonJpg" type="button" id="downloadJpg" (click)="downloadJpg()">
+            {{ options?.textButtonJpg }}
+        </button>
+        <button *ngIf="options?.textButtonPdf" type="button" id="downloadPdf" (click)="downloadPdf()">
+            {{ options?.textButtonPdf }}
         </button>
     </div>
 </ng-container>

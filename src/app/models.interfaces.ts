@@ -8,7 +8,9 @@ export interface IOptionsCanvas {
     backgroundColor: string,
     border: string,
     textButtonClean: string,
-    textButtonImage: string,
+    textButtonImgElement: string,
+    textButtonJpg: string,
+    textButtonPdf: string,
     clean: boolean;
 }
 

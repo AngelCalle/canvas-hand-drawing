@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CanvasDrawingComponent } from './canvas-drawing/canvas-drawing.component';
 import { CanvasDrawingHostListenerComponent } from './canvas-drawing-host-listener/canvas-drawing-host-listener.component';
+import { HostListenerComponent } from './host-listener/host-listener.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CanvasDrawingComponent,
-    CanvasDrawingHostListenerComponent
+    CanvasDrawingHostListenerComponent,
+    HostListenerComponent
   ],
   imports: [
     BrowserModule,

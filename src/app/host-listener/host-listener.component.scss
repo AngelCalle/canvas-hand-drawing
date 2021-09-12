@@ -1,0 +1,45 @@
+.wrapper-main{
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.wrapper-player{
+    position: relative;
+    width: 50rem;
+    height: 25rem;
+    border-radius: .5rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.player{
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    left: 0;
+    transition: all ease 200ms;
+}
+
+.player img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.jump-player{
+    animation-name: jump;
+    animation-duration: 2000ms;
+    animation-iteration-count: 1;
+}
+
+@keyframes jump {
+    0% {
+        bottom: 0;
+    }
+    50%{
+        bottom: 50px;
+    }
+    100%{
+        bottom: 0;
+    }
+}
